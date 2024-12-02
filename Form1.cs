@@ -245,6 +245,7 @@ namespace MyfareReader
             byte[] data = sendCommand(textCommand.Text);
             string res = byteToHexString(data);
             updateStatusCode(data[0]);
+            textResponse.AppendText("[+] status code: 0x" + data[0].ToString("X2") + "\r\n");
             textResponse.AppendText("[+] data received: 0x" + res.Substring(2, res.Length - 2) + "\r\n");
             textResponse.AppendText("[+] data hex and ascii dump:\r\n");
             textResponse.AppendText(byteToHexAsciiStr(hexStringToByte(res.Substring(2, res.Length - 2))) + "\r\n");
@@ -294,28 +295,30 @@ namespace MyfareReader
         }
 
         void setStatusBit(System.Windows.Forms.TextBox t, int b) {
+            bool prev = t.Text.Equals("1");
             if (b != 0)
             {
                 t.Text = "1";
-                t.BackColor = Color.FromArgb(166, 209, 137);
+                t.BackColor = Color.FromArgb(166, 209, 137); // green
             }
             else
             {
                 t.Text = "0";
-                t.BackColor = Color.FromArgb(224, 224, 224);
+                if (prev) t.BackColor = Color.FromArgb(243, 139, 168);
+                else t.BackColor = Color.FromArgb(224, 224, 224);
             }
         }
 
         void updateStatusCode(byte code)
         {
             Console.WriteLine("Status code: 0x{0:X}", code);
-            setStatusBit(statusBit0 ,code & (1 << 0));
-            setStatusBit(statusBit1, code & (1 << 1));
-            setStatusBit(statusBit2, code & (1 << 2));
-            setStatusBit(statusBit3, code & (1 << 3));
-            setStatusBit(statusBit4, code & (1 << 4));
-            setStatusBit(statusBit5, code & (1 << 5));
-            setStatusBit(statusBit6, code & (1 << 6));
+            setStatusBit(statusBit0 ,code & EEPROM_ERROR);
+            setStatusBit(statusBit1, code & CARD_OK);
+            setStatusBit(statusBit2, code & RX_OK);
+            setStatusBit(statusBit3, code & RS232_ERROR);
+            setStatusBit(statusBit4, code & MF_TYPE);
+            setStatusBit(statusBit5, code & UL_TYPE);
+            setStatusBit(statusBit6, code & MFRC_ERROR);
             setStatusBit(statusBit7, code & (1 << 7));
         }
 
@@ -329,7 +332,6 @@ namespace MyfareReader
                 serialPortRFID.ReadTimeout = 1000;
                 System.Threading.Thread.Sleep(100);
                 serialPortRFID.Read(bufferR, 0, bufferR.Length);
-                updateStatusCode(bufferR[0]);
             }
             catch (Exception err)
             {
@@ -369,7 +371,6 @@ namespace MyfareReader
             byte[] data = hexStringToByte(cmd);
             writeByte(data);
             byte[] bufferR = readByte(17);
-            updateStatusCode(bufferR[0]);
             int sum = 0;
             for (int i = 1; i < 16; i++) {
                 sum <<= 8;
