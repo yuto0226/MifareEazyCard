@@ -79,6 +79,7 @@
             // 
             // btnSendCommand
             // 
+            this.btnSendCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSendCommand.Font = new System.Drawing.Font("Noto Sans TC", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSendCommand.Location = new System.Drawing.Point(639, 277);
             this.btnSendCommand.Name = "btnSendCommand";
@@ -91,6 +92,8 @@
             // textCommand
             // 
             this.textCommand.AcceptsReturn = true;
+            this.textCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textCommand.Font = new System.Drawing.Font("JetBrainsMono NF Medium", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textCommand.Location = new System.Drawing.Point(6, 277);
             this.textCommand.Name = "textCommand";
@@ -106,6 +109,9 @@
             // 
             // textResponse
             // 
+            this.textResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textResponse.Font = new System.Drawing.Font("JetBrainsMono NF", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textResponse.Location = new System.Drawing.Point(6, 26);
             this.textResponse.Multiline = true;
@@ -130,6 +136,9 @@
             // 
             // groupConsole
             // 
+            this.groupConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupConsole.Controls.Add(this.textCommand);
             this.groupConsole.Controls.Add(this.textResponse);
             this.groupConsole.Controls.Add(this.btnSendCommand);
@@ -143,6 +152,7 @@
             // 
             // groupSetting
             // 
+            this.groupSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupSetting.Controls.Add(this.label1);
             this.groupSetting.Controls.Add(this.comboCOM);
             this.groupSetting.Font = new System.Drawing.Font("JetBrainsMono NF", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -166,6 +176,7 @@
             // 
             // btnConnect
             // 
+            this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConnect.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnConnect.Location = new System.Drawing.Point(742, 515);
             this.btnConnect.Name = "btnConnect";
@@ -178,6 +189,8 @@
             // 
             // groupStatus
             // 
+            this.groupStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupStatus.Controls.Add(this.labelCardStatusHint);
             this.groupStatus.Controls.Add(this.labelIdStatus);
             this.groupStatus.Controls.Add(this.textCardID);
@@ -400,6 +413,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnDeduction);
             this.groupBox1.Controls.Add(this.btnCharge);
             this.groupBox1.Controls.Add(this.textBalance);
