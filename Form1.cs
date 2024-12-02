@@ -43,6 +43,7 @@ namespace MyfareReader
 
         private byte[] hexStringToByte(string hexString)
         {
+            hexString = hexString.Replace(" ", "");
             byte[] returnedBytes = new byte[hexString.Length / 2];
 
             for (int i = 0; i < returnedBytes.Length; i++)
@@ -279,7 +280,11 @@ namespace MyfareReader
                 labelCardStatusHint.Text = "卡片讀取成功";
                 labelCardStatusHint.ForeColor = Color.FromArgb(64, 160, 43);
 
-                int balance = queryData(1);
+                byte[] data = queryData(1);
+                int balance = 0;
+                for (int i = 0; i < 4; i++) {
+                    balance += data[1 + i] << (i * 4);
+                }
                 textBalance.Text = balance.ToString();
             }
             else
@@ -365,18 +370,12 @@ namespace MyfareReader
             writeByte(cmd);
         }
 
-        int queryData(int block)
+        byte[] queryData(int block)
         {
             string cmd = "52" + block.ToString("X2") + "00";
             byte[] data = hexStringToByte(cmd);
             writeByte(data);
-            byte[] bufferR = readByte(17);
-            int sum = 0;
-            for (int i = 1; i < 16; i++) {
-                sum <<= 8;
-                sum += bufferR[i];
-            }
-            return sum;
+            return readByte(17);
         }
 
         byte[] sendCommand(string c)
@@ -407,5 +406,46 @@ namespace MyfareReader
             }
         }
 
+        private void btnDumpCard_Click(object sender, EventArgs e)
+        {
+            for (int i = 63; i >= 0; i--) {
+                byte[] access = new byte[4];
+                int keyA, keyB;
+                byte[] data = queryData(i);
+                byte statusCode = data[0];
+                data = data.Skip(1).Take(16).ToArray();
+
+                // control block
+                if (i % 4 == 3) {
+                    byte A = (byte)((data[7] & 0xF0) >> 4);
+                    byte B = (byte)(data[8] & 0x0F);
+                    byte C = (byte)((data[8] & 0xF0) >> 4);
+                    Console.WriteLine("[*] A=" + A.ToString("X2") + ", B=" + B.ToString("X2") + ", C=" + C.ToString("X2"));
+                    for (int j = 0; j < 4; j++) {
+                        access[j] = (byte)(((A & (0x01 << j)) >> j) |
+                            (((B & (0x01 << j)) >> j) << 1) |
+                            (((C & (0x01 << j)) >> j) << 2));
+                        Console.WriteLine("[*] access=" + access[j].ToString());
+                    }
+                }
+
+                // print hex and ascii
+                string hex = "", ascii = "";
+                for (int j = 0; j < 16; j ++) {
+                    hex += data[j].ToString("X2") + " ";
+                    if ((j + 1) != 0 && (j + 1) % 8 == 0) hex += " ";
+                    if (char.IsControl((char)data[j])) ascii += ".";
+                    else ascii += (char)data[j];
+                }
+
+                string accessBits = "[ " +
+                    ((access[i % 4] & 1) != 0 ? "1" : "0") + " " +
+                    ((access[i % 4] & (1 << 1)) != 0 ? "1" : "0") + " " +
+                    ((access[i % 4] & (1 << 2)) != 0 ? "1" : "0") + " ]";
+                Console.WriteLine("[+] {0} access bit= {1} {2}", i%3, access[i%4], accessBits);
+
+                textResponse.AppendText("[+] 0x" + i.ToString("X2") + "  " + hex + " |" + ascii + "|  " + accessBits + "\r\n");
+            }
+        }
     }
 }

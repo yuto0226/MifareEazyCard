@@ -56,6 +56,7 @@
             this.labelStatusText = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDumpCard = new System.Windows.Forms.Button();
             this.btnDeduction = new System.Windows.Forms.Button();
             this.btnCharge = new System.Windows.Forms.Button();
             this.textBalance = new System.Windows.Forms.Label();
@@ -81,7 +82,7 @@
             // 
             this.btnSendCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSendCommand.Font = new System.Drawing.Font("Noto Sans TC", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSendCommand.Location = new System.Drawing.Point(639, 277);
+            this.btnSendCommand.Location = new System.Drawing.Point(537, 278);
             this.btnSendCommand.Name = "btnSendCommand";
             this.btnSendCommand.Size = new System.Drawing.Size(85, 34);
             this.btnSendCommand.TabIndex = 3;
@@ -95,9 +96,9 @@
             this.textCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textCommand.Font = new System.Drawing.Font("JetBrainsMono NF Medium", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textCommand.Location = new System.Drawing.Point(6, 277);
+            this.textCommand.Location = new System.Drawing.Point(6, 278);
             this.textCommand.Name = "textCommand";
-            this.textCommand.Size = new System.Drawing.Size(627, 34);
+            this.textCommand.Size = new System.Drawing.Size(525, 34);
             this.textCommand.TabIndex = 2;
             this.textCommand.Text = "530000";
             this.textCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textCommand_KeyDown);
@@ -112,13 +113,13 @@
             this.textResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textResponse.Font = new System.Drawing.Font("JetBrainsMono NF", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textResponse.Font = new System.Drawing.Font("JetBrainsMono NF", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textResponse.Location = new System.Drawing.Point(6, 26);
             this.textResponse.Multiline = true;
             this.textResponse.Name = "textResponse";
             this.textResponse.ReadOnly = true;
             this.textResponse.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textResponse.Size = new System.Drawing.Size(712, 245);
+            this.textResponse.Size = new System.Drawing.Size(610, 246);
             this.textResponse.TabIndex = 99;
             this.textResponse.TabStop = false;
             // 
@@ -145,7 +146,7 @@
             this.groupConsole.Font = new System.Drawing.Font("JetBrainsMono NF", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupConsole.Location = new System.Drawing.Point(12, 272);
             this.groupConsole.Name = "groupConsole";
-            this.groupConsole.Size = new System.Drawing.Size(724, 317);
+            this.groupConsole.Size = new System.Drawing.Size(622, 318);
             this.groupConsole.TabIndex = 4;
             this.groupConsole.TabStop = false;
             this.groupConsole.Text = "Console";
@@ -156,7 +157,7 @@
             this.groupSetting.Controls.Add(this.label1);
             this.groupSetting.Controls.Add(this.comboCOM);
             this.groupSetting.Font = new System.Drawing.Font("JetBrainsMono NF", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupSetting.Location = new System.Drawing.Point(742, 440);
+            this.groupSetting.Location = new System.Drawing.Point(640, 441);
             this.groupSetting.Name = "groupSetting";
             this.groupSetting.Size = new System.Drawing.Size(298, 69);
             this.groupSetting.TabIndex = 5;
@@ -178,7 +179,7 @@
             // 
             this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConnect.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnConnect.Location = new System.Drawing.Point(742, 515);
+            this.btnConnect.Location = new System.Drawing.Point(640, 516);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(298, 74);
             this.btnConnect.TabIndex = 1;
@@ -207,10 +208,10 @@
             this.groupStatus.Controls.Add(this.labelStatusIcon);
             this.groupStatus.Controls.Add(this.labelStatusText);
             this.groupStatus.Font = new System.Drawing.Font("JetBrainsMono NF Medium", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupStatus.Location = new System.Drawing.Point(742, 35);
+            this.groupStatus.Location = new System.Drawing.Point(640, 35);
             this.groupStatus.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.groupStatus.Name = "groupStatus";
-            this.groupStatus.Size = new System.Drawing.Size(298, 399);
+            this.groupStatus.Size = new System.Drawing.Size(298, 400);
             this.groupStatus.TabIndex = 6;
             this.groupStatus.TabStop = false;
             this.groupStatus.Text = "Status";
@@ -415,6 +416,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnDumpCard);
             this.groupBox1.Controls.Add(this.btnDeduction);
             this.groupBox1.Controls.Add(this.btnCharge);
             this.groupBox1.Controls.Add(this.textBalance);
@@ -423,15 +425,30 @@
             this.groupBox1.Controls.Add(this.labelAmount);
             this.groupBox1.Location = new System.Drawing.Point(12, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(724, 231);
+            this.groupBox1.Size = new System.Drawing.Size(622, 231);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control";
             // 
+            // btnDumpCard
+            // 
+            this.btnDumpCard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDumpCard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDumpCard.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnDumpCard.Location = new System.Drawing.Point(413, 168);
+            this.btnDumpCard.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
+            this.btnDumpCard.Name = "btnDumpCard";
+            this.btnDumpCard.Size = new System.Drawing.Size(203, 54);
+            this.btnDumpCard.TabIndex = 6;
+            this.btnDumpCard.Text = "Dump Data";
+            this.btnDumpCard.UseVisualStyleBackColor = true;
+            this.btnDumpCard.Click += new System.EventHandler(this.btnDumpCard_Click);
+            // 
             // btnDeduction
             // 
+            this.btnDeduction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeduction.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDeduction.Location = new System.Drawing.Point(469, 79);
+            this.btnDeduction.Location = new System.Drawing.Point(482, 92);
             this.btnDeduction.Name = "btnDeduction";
             this.btnDeduction.Size = new System.Drawing.Size(134, 54);
             this.btnDeduction.TabIndex = 5;
@@ -440,8 +457,9 @@
             // 
             // btnCharge
             // 
+            this.btnCharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCharge.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnCharge.Location = new System.Drawing.Point(469, 24);
+            this.btnCharge.Location = new System.Drawing.Point(482, 30);
             this.btnCharge.Name = "btnCharge";
             this.btnCharge.Size = new System.Drawing.Size(134, 54);
             this.btnCharge.TabIndex = 4;
@@ -452,12 +470,12 @@
             // 
             this.textBalance.AutoSize = true;
             this.textBalance.Font = new System.Drawing.Font("JetBrainsMono NF", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBalance.Location = new System.Drawing.Point(86, 29);
+            this.textBalance.Location = new System.Drawing.Point(88, 29);
             this.textBalance.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.textBalance.Name = "textBalance";
-            this.textBalance.Size = new System.Drawing.Size(287, 53);
+            this.textBalance.Size = new System.Drawing.Size(263, 53);
             this.textBalance.TabIndex = 3;
-            this.textBalance.Text = "10000000000";
+            this.textBalance.Text = "1000000000";
             // 
             // labelBalance
             // 
@@ -472,11 +490,11 @@
             // 
             // textAmount
             // 
-            this.textAmount.Font = new System.Drawing.Font("JetBrainsMono NF", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textAmount.Location = new System.Drawing.Point(86, 88);
+            this.textAmount.Font = new System.Drawing.Font("JetBrainsMono NF", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textAmount.Location = new System.Drawing.Point(95, 88);
             this.textAmount.MaxLength = 10;
             this.textAmount.Name = "textAmount";
-            this.textAmount.Size = new System.Drawing.Size(287, 43);
+            this.textAmount.Size = new System.Drawing.Size(254, 60);
             this.textAmount.TabIndex = 1;
             this.textAmount.Text = "1000000000";
             // 
@@ -484,7 +502,7 @@
             // 
             this.labelAmount.AutoSize = true;
             this.labelAmount.Font = new System.Drawing.Font("Noto Sans TC", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labelAmount.Location = new System.Drawing.Point(6, 88);
+            this.labelAmount.Location = new System.Drawing.Point(6, 101);
             this.labelAmount.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.labelAmount.Name = "labelAmount";
             this.labelAmount.Size = new System.Drawing.Size(74, 41);
@@ -501,7 +519,7 @@
             this.說明ToolStripMenuItem});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(1052, 30);
+            this.menuMain.Size = new System.Drawing.Size(950, 30);
             this.menuMain.TabIndex = 8;
             this.menuMain.Text = "選單";
             // 
@@ -531,10 +549,10 @@
             this.statusMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.statusMain.Location = new System.Drawing.Point(0, 591);
+            this.statusMain.Location = new System.Drawing.Point(0, 592);
             this.statusMain.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.statusMain.Name = "statusMain";
-            this.statusMain.Size = new System.Drawing.Size(1052, 28);
+            this.statusMain.Size = new System.Drawing.Size(950, 28);
             this.statusMain.TabIndex = 9;
             this.statusMain.Text = "statusStrip1";
             // 
@@ -554,7 +572,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1052, 619);
+            this.ClientSize = new System.Drawing.Size(950, 620);
             this.Controls.Add(this.statusMain);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupStatus);
@@ -623,6 +641,7 @@
         private System.Windows.Forms.Label textBalance;
         private System.Windows.Forms.Button btnCharge;
         private System.Windows.Forms.Button btnDeduction;
+        private System.Windows.Forms.Button btnDumpCard;
     }
 }
 
