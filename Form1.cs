@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace MyfareReader
             InitializeComponent();
             setConnectState(false);
             TestAndConnect();
+            textResponse.AppendText("[*] 可以放大螢幕獲得較佳的閱讀空間");
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -125,7 +127,7 @@ namespace MyfareReader
                 // control
                 textAmount.Enabled = true;
                 btnCharge.Enabled = true;
-                btnDeduction.Enabled = false;
+                btnDeduction.Enabled = true;
             }
             else
             {
@@ -241,7 +243,7 @@ namespace MyfareReader
         void sendConsoleCmdRecv()
         {
             if (textCommand.Text == "") return;
-            textResponse.AppendText("[+] data writing: 0x" + textCommand.Text + "\r\n");
+            textResponse.AppendText("[+] data writing: 0x" + textCommand.Text.Replace(" ","") + "\r\n");
             System.Console.WriteLine("[+] data writing: 0x" + textCommand.Text);
             byte[] data = sendCommand(textCommand.Text);
             string res = byteToHexString(data);
@@ -256,6 +258,30 @@ namespace MyfareReader
         private void btnSendCommand_Click(object sender, EventArgs e)
         {
             sendConsoleCmdRecv();
+        }
+
+        bool isValueBlockFormatted(byte[] data) {
+            for (int i = 0; i < 4; i++) {
+                Console.WriteLine("[*] {0}: data={1} ~data={2} data3={3}", i, data[i].ToString("X2"), data[i + 4].ToString("X2"), data[i + 8].ToString("X2"));
+                if ((data[i] != (~data[i + 4])) || (data[i] != data[i + 8])) {
+                    Console.WriteLine("[-] data format error.");
+                    return false;
+                }
+            }
+            for (int i = 0; i < 4; i += 2)
+                if (data[i + 12] != ~data[i + 13]) {
+                    Console.WriteLine("[-] address format error.");
+                    return false;
+                }
+            return true;
+        }
+
+        void valueBlockFormat(int block) {
+            sendCommand("00000000 FFFFFFFF 00000000" +
+                block.ToString("X2") +
+                (~block).ToString("X2") +
+                block.ToString("X2") +
+                (~block).ToString("X2"));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -281,9 +307,18 @@ namespace MyfareReader
                 labelCardStatusHint.ForeColor = Color.FromArgb(64, 160, 43);
 
                 byte[] data = queryData(1);
+                data = data.Skip(1).Take(16).ToArray(); // 拿掉 status
+
+                //if (!isValueBlockFormatted(data))
+                //{
+                //    textResponse.AppendText("[-] 這張卡片需要被格式化\r\n");
+                //    valueBlockFormat(1);
+                //    textResponse.AppendText("[+] 格式化完成\r\n");
+                //}
+
                 int balance = 0;
                 for (int i = 0; i < 4; i++) {
-                    balance += data[1 + i] << (i * 4);
+                    balance += data[i] << (i * 8);
                 }
                 textBalance.Text = balance.ToString();
             }
@@ -446,6 +481,49 @@ namespace MyfareReader
 
                 textResponse.AppendText("[+] 0x" + i.ToString("X2") + "  " + hex + " |" + ascii + "|  " + accessBits + "\r\n");
             }
+        }
+
+        private void btnCharge_Click(object sender, EventArgs e)
+        {
+            string hexAmount = int.Parse(textAmount.Text).ToString("X8");
+            byte[] byteAmount = hexStringToByte(hexAmount);
+            string lsbAmount = byteToHexString(byteAmount.Reverse().ToArray());
+            Console.WriteLine("[*] lsbAmount={0}", lsbAmount);
+            string cmd = "49010001" + lsbAmount;
+
+            textResponse.AppendText("[+] data writing: 0x" + cmd + "\r\n");
+            System.Console.WriteLine("[+] data writing: 0x" + cmd);
+            byte[] data = sendCommand(cmd);
+            string res = byteToHexString(data);
+            updateStatusCode(data[0]);
+            textResponse.AppendText("[+] status code: 0x" + data[0].ToString("X2") + "\r\n");
+            textResponse.AppendText("[+] data received: 0x" + res.Substring(2, res.Length - 2) + "\r\n");
+            textResponse.AppendText("[+] hex and ascii dump:\r\n");
+            textResponse.AppendText(byteToHexAsciiStr(hexStringToByte(res.Substring(2, res.Length - 2))) + "\r\n");
+        }
+
+        private void btnDeduction_Click(object sender, EventArgs e)
+        {
+            string hexAmount = int.Parse(textAmount.Text).ToString("X8");
+            byte[] byteAmount = hexStringToByte(hexAmount);
+            string lsbAmount = byteToHexString(byteAmount.Reverse().ToArray());
+            Console.WriteLine("[*] lsbAmount={0}", lsbAmount);
+            string cmd = "44010001" + lsbAmount;
+
+            textResponse.AppendText("[+] data writing: 0x" + cmd + "\r\n");
+            System.Console.WriteLine("[+] data writing: 0x" + cmd);
+            byte[] data = sendCommand(cmd);
+            string res = byteToHexString(data);
+            updateStatusCode(data[0]);
+            textResponse.AppendText("[+] status code: 0x" + data[0].ToString("X2") + "\r\n");
+            textResponse.AppendText("[+] data received: 0x" + res.Substring(2, res.Length - 2) + "\r\n");
+            textResponse.AppendText("[+] hex and ascii dump:\r\n");
+            textResponse.AppendText(byteToHexAsciiStr(hexStringToByte(res.Substring(2, res.Length - 2))) + "\r\n");
+        }
+
+        private void btnClearAmount_Click(object sender, EventArgs e)
+        {
+            textAmount.Text  = "0";
         }
     }
 }

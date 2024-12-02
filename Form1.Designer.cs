@@ -70,6 +70,9 @@
             this.statusMain = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.menuItemRepo = new System.Windows.Forms.ToolStripMenuItem();
+            this.結束ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnClearAmount = new System.Windows.Forms.Button();
             this.groupConsole.SuspendLayout();
             this.groupSetting.SuspendLayout();
             this.groupStatus.SuspendLayout();
@@ -82,10 +85,11 @@
             // 
             this.btnSendCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSendCommand.Font = new System.Drawing.Font("Noto Sans TC", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSendCommand.Location = new System.Drawing.Point(537, 278);
+            this.btnSendCommand.Location = new System.Drawing.Point(587, 279);
             this.btnSendCommand.Name = "btnSendCommand";
             this.btnSendCommand.Size = new System.Drawing.Size(85, 34);
             this.btnSendCommand.TabIndex = 3;
+            this.btnSendCommand.TabStop = false;
             this.btnSendCommand.Text = "送出";
             this.btnSendCommand.UseVisualStyleBackColor = true;
             this.btnSendCommand.Click += new System.EventHandler(this.btnSendCommand_Click);
@@ -96,9 +100,9 @@
             this.textCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textCommand.Font = new System.Drawing.Font("JetBrainsMono NF Medium", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textCommand.Location = new System.Drawing.Point(6, 278);
+            this.textCommand.Location = new System.Drawing.Point(6, 279);
             this.textCommand.Name = "textCommand";
-            this.textCommand.Size = new System.Drawing.Size(525, 34);
+            this.textCommand.Size = new System.Drawing.Size(575, 34);
             this.textCommand.TabIndex = 2;
             this.textCommand.Text = "530000";
             this.textCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textCommand_KeyDown);
@@ -119,7 +123,7 @@
             this.textResponse.Name = "textResponse";
             this.textResponse.ReadOnly = true;
             this.textResponse.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textResponse.Size = new System.Drawing.Size(610, 246);
+            this.textResponse.Size = new System.Drawing.Size(660, 247);
             this.textResponse.TabIndex = 99;
             this.textResponse.TabStop = false;
             // 
@@ -146,7 +150,7 @@
             this.groupConsole.Font = new System.Drawing.Font("JetBrainsMono NF", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupConsole.Location = new System.Drawing.Point(12, 272);
             this.groupConsole.Name = "groupConsole";
-            this.groupConsole.Size = new System.Drawing.Size(622, 318);
+            this.groupConsole.Size = new System.Drawing.Size(672, 319);
             this.groupConsole.TabIndex = 4;
             this.groupConsole.TabStop = false;
             this.groupConsole.Text = "Console";
@@ -157,7 +161,7 @@
             this.groupSetting.Controls.Add(this.label1);
             this.groupSetting.Controls.Add(this.comboCOM);
             this.groupSetting.Font = new System.Drawing.Font("JetBrainsMono NF", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupSetting.Location = new System.Drawing.Point(640, 441);
+            this.groupSetting.Location = new System.Drawing.Point(690, 442);
             this.groupSetting.Name = "groupSetting";
             this.groupSetting.Size = new System.Drawing.Size(298, 69);
             this.groupSetting.TabIndex = 5;
@@ -179,7 +183,7 @@
             // 
             this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConnect.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnConnect.Location = new System.Drawing.Point(640, 516);
+            this.btnConnect.Location = new System.Drawing.Point(690, 517);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(298, 74);
             this.btnConnect.TabIndex = 1;
@@ -208,10 +212,10 @@
             this.groupStatus.Controls.Add(this.labelStatusIcon);
             this.groupStatus.Controls.Add(this.labelStatusText);
             this.groupStatus.Font = new System.Drawing.Font("JetBrainsMono NF Medium", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupStatus.Location = new System.Drawing.Point(640, 35);
+            this.groupStatus.Location = new System.Drawing.Point(690, 35);
             this.groupStatus.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.groupStatus.Name = "groupStatus";
-            this.groupStatus.Size = new System.Drawing.Size(298, 400);
+            this.groupStatus.Size = new System.Drawing.Size(298, 401);
             this.groupStatus.TabIndex = 6;
             this.groupStatus.TabStop = false;
             this.groupStatus.Text = "Status";
@@ -416,6 +420,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnClearAmount);
             this.groupBox1.Controls.Add(this.btnDumpCard);
             this.groupBox1.Controls.Add(this.btnDeduction);
             this.groupBox1.Controls.Add(this.btnCharge);
@@ -425,7 +430,7 @@
             this.groupBox1.Controls.Add(this.labelAmount);
             this.groupBox1.Location = new System.Drawing.Point(12, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(622, 231);
+            this.groupBox1.Size = new System.Drawing.Size(672, 231);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control";
@@ -435,11 +440,12 @@
             this.btnDumpCard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDumpCard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnDumpCard.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDumpCard.Location = new System.Drawing.Point(413, 168);
+            this.btnDumpCard.Location = new System.Drawing.Point(463, 168);
             this.btnDumpCard.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             this.btnDumpCard.Name = "btnDumpCard";
             this.btnDumpCard.Size = new System.Drawing.Size(203, 54);
             this.btnDumpCard.TabIndex = 6;
+            this.btnDumpCard.TabStop = false;
             this.btnDumpCard.Text = "Dump Data";
             this.btnDumpCard.UseVisualStyleBackColor = true;
             this.btnDumpCard.Click += new System.EventHandler(this.btnDumpCard_Click);
@@ -448,23 +454,27 @@
             // 
             this.btnDeduction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeduction.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDeduction.Location = new System.Drawing.Point(482, 92);
+            this.btnDeduction.Location = new System.Drawing.Point(532, 92);
             this.btnDeduction.Name = "btnDeduction";
             this.btnDeduction.Size = new System.Drawing.Size(134, 54);
             this.btnDeduction.TabIndex = 5;
+            this.btnDeduction.TabStop = false;
             this.btnDeduction.Text = "扣款";
             this.btnDeduction.UseVisualStyleBackColor = true;
+            this.btnDeduction.Click += new System.EventHandler(this.btnDeduction_Click);
             // 
             // btnCharge
             // 
             this.btnCharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCharge.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnCharge.Location = new System.Drawing.Point(482, 30);
+            this.btnCharge.Location = new System.Drawing.Point(532, 30);
             this.btnCharge.Name = "btnCharge";
             this.btnCharge.Size = new System.Drawing.Size(134, 54);
             this.btnCharge.TabIndex = 4;
+            this.btnCharge.TabStop = false;
             this.btnCharge.Text = "儲值";
             this.btnCharge.UseVisualStyleBackColor = true;
+            this.btnCharge.Click += new System.EventHandler(this.btnCharge_Click);
             // 
             // textBalance
             // 
@@ -496,6 +506,7 @@
             this.textAmount.Name = "textAmount";
             this.textAmount.Size = new System.Drawing.Size(254, 60);
             this.textAmount.TabIndex = 1;
+            this.textAmount.TabStop = false;
             this.textAmount.Text = "1000000000";
             // 
             // labelAmount
@@ -519,14 +530,15 @@
             this.說明ToolStripMenuItem});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(950, 30);
+            this.menuMain.Size = new System.Drawing.Size(1000, 30);
             this.menuMain.TabIndex = 8;
             this.menuMain.Text = "選單";
             // 
             // 檔案ToolStripMenuItem
             // 
             this.檔案ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.另存新檔ToolStripMenuItem});
+            this.另存新檔ToolStripMenuItem,
+            this.結束ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
             this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(54, 26);
             this.檔案ToolStripMenuItem.Text = "檔案";
@@ -534,11 +546,13 @@
             // 另存新檔ToolStripMenuItem
             // 
             this.另存新檔ToolStripMenuItem.Name = "另存新檔ToolStripMenuItem";
-            this.另存新檔ToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.另存新檔ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.另存新檔ToolStripMenuItem.Text = "另存新檔";
             // 
             // 說明ToolStripMenuItem
             // 
+            this.說明ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemRepo});
             this.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem";
             this.說明ToolStripMenuItem.Size = new System.Drawing.Size(54, 26);
             this.說明ToolStripMenuItem.Text = "說明";
@@ -549,10 +563,10 @@
             this.statusMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.statusMain.Location = new System.Drawing.Point(0, 592);
+            this.statusMain.Location = new System.Drawing.Point(0, 593);
             this.statusMain.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.statusMain.Name = "statusMain";
-            this.statusMain.Size = new System.Drawing.Size(950, 28);
+            this.statusMain.Size = new System.Drawing.Size(1000, 28);
             this.statusMain.TabIndex = 9;
             this.statusMain.Text = "statusStrip1";
             // 
@@ -568,11 +582,35 @@
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 20);
             // 
+            // menuItemRepo
+            // 
+            this.menuItemRepo.Name = "menuItemRepo";
+            this.menuItemRepo.Size = new System.Drawing.Size(224, 26);
+            this.menuItemRepo.Text = "repo";
+            // 
+            // 結束ToolStripMenuItem
+            // 
+            this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.結束ToolStripMenuItem.Text = "結束";
+            // 
+            // btnClearAmount
+            // 
+            this.btnClearAmount.Font = new System.Drawing.Font("Noto Sans TC", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClearAmount.Location = new System.Drawing.Point(355, 92);
+            this.btnClearAmount.Name = "btnClearAmount";
+            this.btnClearAmount.Size = new System.Drawing.Size(171, 54);
+            this.btnClearAmount.TabIndex = 7;
+            this.btnClearAmount.TabStop = false;
+            this.btnClearAmount.Text = "清除金額";
+            this.btnClearAmount.UseVisualStyleBackColor = true;
+            this.btnClearAmount.Click += new System.EventHandler(this.btnClearAmount_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 620);
+            this.ClientSize = new System.Drawing.Size(1000, 621);
             this.Controls.Add(this.statusMain);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupStatus);
@@ -580,6 +618,7 @@
             this.Controls.Add(this.groupConsole);
             this.Controls.Add(this.groupSetting);
             this.Controls.Add(this.menuMain);
+            this.MinimumSize = new System.Drawing.Size(1018, 500);
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupConsole.ResumeLayout(false);
@@ -642,6 +681,9 @@
         private System.Windows.Forms.Button btnCharge;
         private System.Windows.Forms.Button btnDeduction;
         private System.Windows.Forms.Button btnDumpCard;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRepo;
+        private System.Windows.Forms.ToolStripMenuItem 結束ToolStripMenuItem;
+        private System.Windows.Forms.Button btnClearAmount;
     }
 }
 
